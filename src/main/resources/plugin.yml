@@ -1,0 +1,16 @@
+name: AutoStoragePlugin
+version: '${version}'
+main: me.vahoo.autostorageplugin.Main
+api-version: '1.20'
+
+commands:
+  store:
+    description: Открыть личное хранилище
+    usage: /store [open <player>]
+permissions:
+  autostorage.use:
+    description: Использовать своё хранилище
+    default: true
+  autostorage.admin:
+    description: Открывать хранилища других игроков
+    default: op
