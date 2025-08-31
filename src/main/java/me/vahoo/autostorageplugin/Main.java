@@ -2,6 +2,7 @@ package me.vahoo.autostorageplugin;
 
 import me.vahoo.autostorageplugin.command.StorageCommand;
 import me.vahoo.autostorageplugin.manager.StorageManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -12,6 +13,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         storageManager = new StorageManager(this);
         getCommand("store").setExecutor(new StorageCommand(storageManager));
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(storageManager), this);
         getLogger().info("AutoStorage включен!");
     }
 
@@ -25,4 +27,3 @@ public class Main extends JavaPlugin {
         return storageManager;
     }
 }
-

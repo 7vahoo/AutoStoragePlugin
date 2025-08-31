@@ -1,10 +1,11 @@
 package me.vahoo.autostorageplugin.storage;
 
+import me.vahoo.autostorageplugin.util.ItemStackSerializer;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class PlayerStorage {
 
     public void save() {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-        config.set("items", inventory.getContents());
+        config.set("items", ItemStackSerializer.toBase64(inventory.getContents()));
         try {
             config.save(file);
         } catch (IOException e) {
@@ -38,10 +39,13 @@ public class PlayerStorage {
 
     public void load() {
         inventory = Bukkit.createInventory(null, 27, "Storage");
-        if (file.exists()) {
-            FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-            ItemStack[] items = ((ItemStack[]) config.get("items"));
-            if (items != null) inventory.setContents(items);
+        if (!file.exists()) return;
+
+        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+        String base64 = config.getString("items");
+        if (base64 != null) {
+            ItemStack[] items = ItemStackSerializer.fromBase64(base64);
+            inventory.setContents(items);
         }
     }
 }

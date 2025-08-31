@@ -19,7 +19,6 @@ public class StorageManager {
         folder = new File(plugin.getDataFolder(), "storages");
         if (!folder.exists()) folder.mkdirs();
 
-    
         for (Player player : Bukkit.getOnlinePlayers()) {
             storages.put(player.getUniqueId(), new PlayerStorage(player.getUniqueId(), folder));
         }
@@ -34,4 +33,10 @@ public class StorageManager {
             storage.save();
         }
     }
+
+    public void savePlayer(Player player) {
+        PlayerStorage storage = storages.get(player.getUniqueId());
+        if (storage != null) storage.save();
+    }
+
 }
