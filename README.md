@@ -32,7 +32,3 @@
 
 - Хранилища сохраняются в `plugins/AutoStoragePlugin/storages/UUID.yml`.
 - Размер инвентаря по умолчанию — 27 слотов.
-
-## Исходный код
-
-- GitHub: [https://github.com/7vahoo/AutoStoragePlugin](https://github.com/7vahoo/AutoStoragePlugin)
