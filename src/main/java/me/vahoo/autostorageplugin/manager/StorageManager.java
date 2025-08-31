@@ -19,7 +19,7 @@ public class StorageManager {
         folder = new File(plugin.getDataFolder(), "storages");
         if (!folder.exists()) folder.mkdirs();
 
-        // Загружаем для онлайн игроков
+    
         for (Player player : Bukkit.getOnlinePlayers()) {
             storages.put(player.getUniqueId(), new PlayerStorage(player.getUniqueId(), folder));
         }
